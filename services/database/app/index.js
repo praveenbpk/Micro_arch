@@ -1,8 +1,7 @@
-const Koa = require("koa");
+const Koa = require('koa');
 const json = require("koa-json");
 const koaRouter = require('koa-router');
-const mongoose = require('mongoose');
-const logger = require('koa-logger');
+const config = require ('./configs')
 
 
 const app = new Koa();
@@ -30,4 +29,7 @@ router.get('/test', ctx => (ctx.body ='hello text'));
 // Router middleware
 app.use(router.routes()).use(router.allowedMethods());
 
-app.listen(3000,() => console.log("server started") );
+app.listen(config.port, () => {
+    console.log(`${config.serviceName} listening at http://${config.host}:${config.port}`);
+  });
+  
